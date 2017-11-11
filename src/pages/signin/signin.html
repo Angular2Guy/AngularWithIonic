@@ -11,24 +11,25 @@
   </ion-navbar>
 
 </ion-header>
-<ion-content>
-  <ion-list>
-  	<ion-item>
-  		<ion-label floating>Username</ion-label>
-  		<ion-input type="text"></ion-input>
-  	</ion-item>
-  	<ion-item>
-  		<ion-label floating>Password</ion-label>
-  		<ion-input type="password"></ion-input>
-  	</ion-item>
-  	<ion-item>
-  		<ion-label floating>Password</ion-label>
-  		<ion-input type="password"></ion-input>
-  	</ion-item>
-  </ion-list>
-  <div padding>  	 
-  	<button ion-button (click)="signin()">Signin</button>
-  </div>
 <ion-content padding>
-
+  <form [formGroup]="signinForm" novalidate>
+	  <ion-list>
+	  	<ion-item>
+	  		<ion-label floating>Username</ion-label>
+	  		<ion-input type="text" formControlName="username"></ion-input>
+	  	</ion-item>
+	  	<ion-item>
+	  		<ion-label floating>Password</ion-label>
+	  		<ion-input type="password" formControlName="password1"></ion-input>
+	  	</ion-item>
+	  	<ion-item>
+	  		<ion-label floating>Password</ion-label>
+	  		<ion-input type="password" formControlName="password2"></ion-input>
+	  	</ion-item>
+	  </ion-list>
+  </form>
+  <div padding>  	 
+  	<button ion-button (click)="signin()" [disabled]="!signinForm.valid">Signin</button>
+  </div>
+<p>Form value: {{ signinForm.value | json }}</p>
 </ion-content>
