@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { Userdata, Exchange } from '../../app/common/userdata';
+import * as CryptoJS from 'crypto-js';
+import { Userdata } from '../../app/common/userdata';
 
 /**
  * Generated class for the SigninPage page.
@@ -45,10 +46,22 @@ export class SigninPage {
       return this.pwMatching;
   }
   
+  private createUserdata() : Userdata {
+      let ud = new Userdata(this.signinForm.get('username').value, '', '');
+      let array = new Uint32Array(32);      
+      crypto.getRandomValues(array);
+      let salt = btoa(array.toString());
+      ud.salt = salt;     
+      let hash =  CryptoJS.PBKDF2(this.signinForm.get('password1').value,salt,{ keySize: 256/32, iterations: 1200 }).toString();
+      ud.hash = hash;
+      return ud;
+  }
+  
   signin():void {
-      let ud = new Userdata(this.signinForm.get('username').value, 'hash');
+      let ud = this.createUserdata();
 //      ud.keys.push(new Exchange("name","token"));      
       localStorage.setItem(this.signinForm.get('username').value, JSON.stringify(ud));
+      console.log(ud);
       this.navCtrl.pop();
   }
 }

@@ -6,18 +6,20 @@
 
 <ion-content padding>
   <h2>Welcome to Cryptocurrency Trading</h2>
-  <ion-list>
-  	<ion-item>
-  		<ion-label floating>Username</ion-label>
-  		<ion-input type="text"></ion-input>
-  	</ion-item>
-  	<ion-item>
-  		<ion-label floating>Password</ion-label>
-  		<ion-input type="password"></ion-input>
-  	</ion-item>
-  </ion-list>
-  <div padding>
-  	<button ion-button>Login</button> 
-  	<button ion-button (click)="signin()">Signin</button>
-  </div>
+  <form (ngSubmit)="onSubmit()" #myForm="ngForm">
+	  <ion-list>  
+	  	<ion-item>
+	  		<ion-label floating>Username</ion-label>
+	  		<ion-input type="text" required [(ngModel)]="username" name="username"></ion-input>
+	  	</ion-item>
+	  	<ion-item>
+	  		<ion-label floating>Password</ion-label>
+	  		<ion-input type="password" required [(ngModel)]="password" name="password"></ion-input>
+	  	</ion-item>
+	  </ion-list>
+	  <div padding>
+	  	<button ion-button type="submit" [disabled]="!myForm.form.valid">Login</button> 
+	  	<button ion-button (click)="signin()">Signin</button>
+	  </div>
+  </form>
 </ion-content>
