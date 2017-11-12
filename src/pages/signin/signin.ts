@@ -19,6 +19,7 @@ import { Userdata } from '../../app/common/userdata';
 export class SigninPage {
   signinForm: FormGroup;  
   pwMatching = true;
+  signinFailed= false;
 
   constructor(private fb: FormBuilder, public navCtrl: NavController, public navParams: NavParams) {
       this.signinForm = this.fb.group({username: ['', Validators.required],
@@ -59,7 +60,13 @@ export class SigninPage {
   
   signin():void {
       let ud = this.createUserdata();
-//      ud.keys.push(new Exchange("name","token"));      
+      let item = localStorage.getItem(this.signinForm.get('username').value);      
+      if(item !== null) {
+          this.signinFailed = true;          
+          return;
+      } else {
+          this.signinFailed = false;
+      }
       localStorage.setItem(this.signinForm.get('username').value, JSON.stringify(ud));
       console.log(ud);
       this.navCtrl.pop();

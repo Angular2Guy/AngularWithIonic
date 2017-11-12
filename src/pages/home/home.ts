@@ -16,10 +16,10 @@ export class HomePage {
 
   }
   
-  onSubmit():void {
-      let ud:Userdata = <Userdata> JSON.parse(localStorage.getItem(this.username));
-      let hash = CryptoJS.PBKDF2(this.password ,ud.salt,{ keySize: 256/32, iterations: 1200 }).toString();
-      if(hash === ud.hash) {
+  login():void {
+      let ud:Userdata = <Userdata> JSON.parse(localStorage.getItem(this.username));      
+      let hash = CryptoJS.PBKDF2(this.password ,ud !== null ? ud.salt : '',{ keySize: 256/32, iterations: 1200 }).toString();
+      if(ud !== null && hash === ud.hash) {
           console.log("ok");
       } else {
           console.log(hash+"-"+ud.hash);

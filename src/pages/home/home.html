@@ -6,7 +6,7 @@
 
 <ion-content padding>
   <h2>Welcome to Cryptocurrency Trading</h2>
-  <form (ngSubmit)="onSubmit()" #myForm="ngForm">
+  <form #myForm="ngForm">
 	  <ion-list>  
 	  	<ion-item>
 	  		<ion-label floating>Username</ion-label>
@@ -16,10 +16,13 @@
 	  		<ion-label floating>Password</ion-label>
 	  		<ion-input type="password" required [(ngModel)]="password" name="password"></ion-input>
 	  	</ion-item>
+	  	<ion-item *ngIf="loginFailed">
+	  		Login Failed
+	  	</ion-item>
 	  </ion-list>
+  </form>
 	  <div padding>
-	  	<button ion-button type="submit" [disabled]="!myForm.form.valid">Login</button> 
+	  	<button ion-button (click)="login()" [disabled]="!myForm.form.valid">Login</button> 
 	  	<button ion-button (click)="signin()">Signin</button>
 	  </div>
-  </form>
 </ion-content>

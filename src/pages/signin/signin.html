@@ -26,6 +26,9 @@
 	  		<ion-label floating>Password</ion-label>
 	  		<ion-input type="password" formControlName="password2"></ion-input>
 	  	</ion-item>
+	  	<ion-item *ngIf="signinFailed" class="errorMsg">
+	  		User not availiable	  		
+	  	</ion-item>
 	  </ion-list>
   </form>
   <div padding>  	 
