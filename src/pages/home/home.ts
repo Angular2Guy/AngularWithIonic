@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { SigninPage } from '../signin/signin';
+import { QuotesPage } from '../quotes/quotes';
 import * as CryptoJS from 'crypto-js';
 import { Userdata } from '../../app/common/userdata';
  
@@ -20,7 +21,7 @@ export class HomePage {
       let ud:Userdata = <Userdata> JSON.parse(localStorage.getItem(this.username));      
       let hash = CryptoJS.PBKDF2(this.password ,ud !== null ? ud.salt : '',{ keySize: 256/32, iterations: 1200 }).toString();
       if(ud !== null && hash === ud.hash) {
-          console.log("ok");
+          this.navCtrl.push(QuotesPage);
       } else {
           console.log(hash+"-"+ud.hash);
       }

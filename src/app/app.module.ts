@@ -9,6 +9,7 @@ import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 import { SigninPageModule } from '../pages/signin/signin.module';
+import { QuotesPageModule } from '../pages/quotes/quotes.module';
  
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -27,6 +28,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     ReactiveFormsModule,
     FormsModule,
     SigninPageModule,
+    QuotesPageModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
