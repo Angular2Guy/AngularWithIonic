@@ -15,20 +15,28 @@
 <ion-content padding>
 	<ion-grid>
   		<ion-row>
-  			<ion-col col-6>BitCoin</ion-col>
-  			<ion-col col-6>{{bitcoinQuote}}</ion-col>
+  			<ion-col col-3>Bitstamp</ion-col>
+  			<ion-col col-3>BitCoin</ion-col>
+  			<ion-col col-3>{{bitcoinBs?.last}}</ion-col>
+  			<ion-col col-3>{{bitcoinBs?.volume | number}}</ion-col>
   		</ion-row>
   		<ion-row>
-  			<ion-col col-6>Ether</ion-col>
-  			<ion-col col-6>{{etherQuote}}</ion-col>
+  			<ion-col col-3>Bitstamp</ion-col>
+  			<ion-col col-3>Ether</ion-col>
+  			<ion-col col-3>{{etherBs?.last}}</ion-col>
+  			<ion-col col-3>{{etherBs?.volume | number}}</ion-col>
   		</ion-row>
   		<ion-row>
-  			<ion-col col-6>LiteCoin</ion-col>
-  			<ion-col col-6>{{ltcQuote}}</ion-col>
+  			<ion-col col-3>Bitstamp</ion-col>
+  			<ion-col col-3>LiteCoin</ion-col>
+  			<ion-col col-3>{{ltcBs?.last}}</ion-col>
+  			<ion-col col-3>{{ltcBs?.volume | number}}</ion-col>
   		</ion-row>
   		<ion-row>
-  			<ion-col col-6>Ripple</ion-col>
-  			<ion-col col-6>{{rippleQuote}}</ion-col>
+  			<ion-col col-3>Bitstamp</ion-col>
+  			<ion-col col-3>Ripple</ion-col>
+  			<ion-col col-3>{{rippleBs?.last}}</ion-col>
+  			<ion-col col-3>{{rippleBs?.volume | number}}</ion-col>
   		</ion-row>
   	</ion-grid>
 </ion-content>

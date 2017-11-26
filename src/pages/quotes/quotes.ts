@@ -16,20 +16,19 @@ import { OrderbookBs } from '../../app/common/orderbookBs';
   templateUrl: 'quotes.html',
 })
 export class QuotesPage {
-  bitcoinQuote = 0.0;
-  etherQuote = 0.0;
-  ltcQuote = 0.0;
-  rippleQuote = 0.0;
-    
-    
+  bitcoinBs = <QuoteBs> {};
+  etherBs = <QuoteBs> {};
+  ltcBs = <QuoteBs> {};
+  rippleBs = <QuoteBs> {};
+  
   constructor(public navCtrl: NavController, public navParams: NavParams, private bitStampServ: BitstampService) {
   }
 
   ionViewDidLoad() {
-    this.bitStampServ.getCurrentQuote(this.bitStampServ.BTCUSD).subscribe(quote => this.bitcoinQuote = quote.last);
-    this.bitStampServ.getCurrentQuote(this.bitStampServ.ETHUSD).subscribe(quote => this.etherQuote = quote.last);
-    this.bitStampServ.getCurrentQuote(this.bitStampServ.LTCUSD).subscribe(quote => this.ltcQuote = quote.last);
-    this.bitStampServ.getCurrentQuote(this.bitStampServ.XRPUSD).subscribe(quote => this.rippleQuote = quote.last);
+    this.bitStampServ.getCurrentQuote(this.bitStampServ.BTCUSD).subscribe(quote => this.bitcoinBs = quote);
+    this.bitStampServ.getCurrentQuote(this.bitStampServ.ETHUSD).subscribe(quote => this.etherBs = quote);
+    this.bitStampServ.getCurrentQuote(this.bitStampServ.LTCUSD).subscribe(quote => this.ltcBs = quote);
+    this.bitStampServ.getCurrentQuote(this.bitStampServ.XRPUSD).subscribe(quote => this.rippleBs = quote);
     console.log('ionViewDidLoad QuotesPage');
   }
 
