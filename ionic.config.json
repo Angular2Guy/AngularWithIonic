@@ -9,6 +9,10 @@
     {
       "path": "/bitstamp",
       "proxyUrl": "http://localhost:8080/bitstamp"
+    },
+    {
+      "path": "/bitfinex",
+      "proxyUrl": "http://localhost:8080/bitfinex"
     }
   ]
 }

@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { BitstampService } from '../../app/services/bitstamp.service';
+import { BitfinexService } from '../../app/services/bitfinex.service';
 import { QuoteBs } from '../../app/common/quoteBs';
-import { OrderbookBs } from '../../app/common/orderbookBs';
+import { QuoteBf } from '../../app/common/quoteBf';
 /**
  * Generated class for the QuotesPage page.
  *
@@ -21,14 +22,24 @@ export class QuotesPage {
   ltcBs = <QuoteBs> {};
   rippleBs = <QuoteBs> {};
   
-  constructor(public navCtrl: NavController, public navParams: NavParams, private bitStampServ: BitstampService) {
+  bitcoinBf = <QuoteBf> {};
+  etherBf = <QuoteBf> {};
+  ltcBf = <QuoteBf> {};
+  rippleBf = <QuoteBf> {};
+  
+  
+  constructor(public navCtrl: NavController, public navParams: NavParams, private bitstampServ: BitstampService, private bitfinexServ: BitfinexService) {
   }
 
   ionViewDidLoad() {
-    this.bitStampServ.getCurrentQuote(this.bitStampServ.BTCUSD).subscribe(quote => this.bitcoinBs = quote);
-    this.bitStampServ.getCurrentQuote(this.bitStampServ.ETHUSD).subscribe(quote => this.etherBs = quote);
-    this.bitStampServ.getCurrentQuote(this.bitStampServ.LTCUSD).subscribe(quote => this.ltcBs = quote);
-    this.bitStampServ.getCurrentQuote(this.bitStampServ.XRPUSD).subscribe(quote => this.rippleBs = quote);
+    this.bitstampServ.getCurrentQuote(this.bitstampServ.BTCUSD).subscribe(quote => this.bitcoinBs = quote);
+    this.bitstampServ.getCurrentQuote(this.bitstampServ.ETHUSD).subscribe(quote => this.etherBs = quote);
+    this.bitstampServ.getCurrentQuote(this.bitstampServ.LTCUSD).subscribe(quote => this.ltcBs = quote);
+    this.bitstampServ.getCurrentQuote(this.bitstampServ.XRPUSD).subscribe(quote => this.rippleBs = quote);
+    this.bitfinexServ.getCurrentQuote(this.bitfinexServ.BTCUSD).subscribe(quote => this.bitcoinBf = quote);
+    this.bitfinexServ.getCurrentQuote(this.bitfinexServ.ETHUSD).subscribe(quote => this.etherBf = quote);
+    this.bitfinexServ.getCurrentQuote(this.bitfinexServ.LTCUSD).subscribe(quote => this.ltcBf = quote);
+    this.bitfinexServ.getCurrentQuote(this.bitfinexServ.XRPUSD).subscribe(quote => this.rippleBf = quote);
     console.log('ionViewDidLoad QuotesPage');
   }
 

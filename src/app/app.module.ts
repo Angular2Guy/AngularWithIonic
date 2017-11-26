@@ -13,7 +13,7 @@ import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 import { SigninPageModule } from '../pages/signin/signin.module';
 import { QuotesPageModule } from '../pages/quotes/quotes.module';
- 
+import { BitfinexService } from './services/bitfinex.service'; 
 import { BitstampService } from './services/bitstamp.service';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -48,6 +48,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     StatusBar,
     SplashScreen,
     BitstampService,
+    BitfinexService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
