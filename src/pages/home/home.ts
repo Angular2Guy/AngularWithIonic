@@ -12,18 +12,20 @@ import { Userdata } from '../../app/common/userdata';
 export class HomePage {
   username: string;
   password: string;
-
+  loginFailed = false;
   constructor(public navCtrl: NavController) {
 
   }
   
   login():void {
-      let ud:Userdata = <Userdata> JSON.parse(localStorage.getItem(this.username));      
-      let hash = CryptoJS.PBKDF2(this.password ,ud !== null ? ud.salt : '',{ keySize: 256/32, iterations: 1200 }).toString();
+      let ud:Userdata = <Userdata> JSON.parse(localStorage.getItem(this.username));         
+      let hash = ud !== null ? CryptoJS.PBKDF2(this.password ,ud.salt,{ keySize: 256/32, iterations: 1200 }).toString() : null;
       if(ud !== null && hash === ud.hash) {
+          this.loginFailed = false;
           this.navCtrl.push(QuotesPage);
-      } else {
-          console.log(hash+"-"+ud.hash);
+      } else {          
+          console.log(hash === null ? '' : hash +"-"+ud !== null ? ud.hash : '');
+          this.loginFailed = true;
       }
   }
   

@@ -16,7 +16,7 @@
 	  		<ion-label floating>Password</ion-label>
 	  		<ion-input type="password" required [(ngModel)]="password" name="password"></ion-input>
 	  	</ion-item>
-	  	<ion-item *ngIf="loginFailed">
+	  	<ion-item *ngIf="loginFailed" class="errorMsg">
 	  		Login Failed
 	  	</ion-item>
 	  </ion-list>
