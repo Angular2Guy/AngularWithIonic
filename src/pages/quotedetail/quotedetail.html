@@ -44,7 +44,18 @@
   			<ion-col col-6 *ngIf="exchange=='bitfinex'">{{quoteBf?.low}}</ion-col>
   		</ion-row>
   		<ion-row>
-  			<ion-col col-12></ion-col>
+  			<ion-col col-12>
+  				<div *ngIf="chartlabels.length > 0" style="display: block;">
+					 
+					<canvas baseChart height="30%" width="100%"
+		                [data]="chartdata"
+		                [labels]="chartlabels" 
+		                [legend]=false
+		                [chartType]="chartType">
+		            </canvas>		            
+		             {{chartlabels.length}}
+				</div>
+  			</ion-col>
   		</ion-row>
   	</ion-grid>
 </ion-content>

@@ -5,6 +5,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
 import { MyApp } from './app.component';
+import { ChartsModule } from 'ng2-charts';
 
 
 import { AboutPage } from '../pages/about/about';
@@ -33,6 +34,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     FormsModule,
     HttpModule,
     HttpClientModule,
+    ChartsModule,
     SigninPageModule,
     QuotesPageModule,
     QuotedetailPageModule,
