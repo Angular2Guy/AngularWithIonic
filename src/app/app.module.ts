@@ -13,6 +13,7 @@ import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 import { SigninPageModule } from '../pages/signin/signin.module';
 import { QuotesPageModule } from '../pages/quotes/quotes.module';
+import { QuotedetailPageModule } from '../pages/quotedetail/quotedetail.module';
 import { BitfinexService } from './services/bitfinex.service'; 
 import { BitstampService } from './services/bitstamp.service';
 import { StatusBar } from '@ionic-native/status-bar';
@@ -34,6 +35,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     HttpClientModule,
     SigninPageModule,
     QuotesPageModule,
+    QuotedetailPageModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],

@@ -4,6 +4,7 @@ import { BitstampService } from '../../app/services/bitstamp.service';
 import { BitfinexService } from '../../app/services/bitfinex.service';
 import { QuoteBs } from '../../app/common/quoteBs';
 import { QuoteBf } from '../../app/common/quoteBf';
+import { QuotedetailPage } from '../quotedetail/quotedetail';
 /**
  * Generated class for the QuotesPage page.
  *
@@ -42,5 +43,12 @@ export class QuotesPage {
     this.bitfinexServ.getCurrentQuote(this.bitfinexServ.XRPUSD).subscribe(quote => this.rippleBf = quote);
     console.log('ionViewDidLoad QuotesPage');
   }
-
+  
+  showDetails(exchange: string, curr: string) : void {
+      //console.log(exchange+" "+curr);
+      this.navCtrl.push(QuotedetailPage, {
+          exchange: exchange,
+          currency: curr});
+  }
+  
 }
