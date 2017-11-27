@@ -14,5 +14,37 @@
 
 
 <ion-content padding>
-
+	<ion-grid>
+		<ion-row>
+  			<ion-col col-12 class="exchange">{{exchange}}</ion-col>
+  		</ion-row>
+  		<ion-row>
+  			<ion-col col-6>Last</ion-col>
+  			<ion-col col-6 *ngIf="exchange=='bitstamp'">{{quoteBs?.last}}</ion-col>
+  			<ion-col col-6 *ngIf="exchange=='bitfinex'">{{quoteBf?.last_price}}</ion-col>  			
+  		</ion-row>
+  		<ion-row>
+  			<ion-col col-6>Volume</ion-col>
+  			<ion-col col-6 *ngIf="exchange=='bitstamp'">{{quoteBs?.volume | number}}</ion-col>
+  			<ion-col col-6 *ngIf="exchange=='bitfinex'">{{quoteBf?.volume | number}}</ion-col>
+  		</ion-row>
+  		<ion-row>
+  			<ion-col col-6>Time</ion-col>
+  			<ion-col col-6 *ngIf="exchange=='bitstamp'">{{quoteBs?.createdAt | date:'dd-MM-yyyy'}}</ion-col>  			
+  			<ion-col col-6 *ngIf="exchange=='bitfinex'">{{quoteBf?.createdAt | date:'dd-MM-yyyy'}}</ion-col>
+  		</ion-row>
+  		<ion-row>
+  			<ion-col col-6>High</ion-col>
+  			<ion-col col-6 *ngIf="exchange=='bitstamp'">{{quoteBs?.high}}</ion-col>
+  			<ion-col col-6 *ngIf="exchange=='bitfinex'">{{quoteBf?.high}}</ion-col>
+  		</ion-row>
+  		<ion-row>
+  			<ion-col col-6>Low</ion-col>
+  			<ion-col col-6 *ngIf="exchange=='bitstamp'">{{quoteBs?.low}}</ion-col>
+  			<ion-col col-6 *ngIf="exchange=='bitfinex'">{{quoteBf?.low}}</ion-col>
+  		</ion-row>
+  		<ion-row>
+  			<ion-col col-12></ion-col>
+  		</ion-row>
+  	</ion-grid>
 </ion-content>
