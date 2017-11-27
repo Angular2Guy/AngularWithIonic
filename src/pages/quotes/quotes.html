@@ -14,53 +14,51 @@
 
 <ion-content padding>
 	<ion-grid>
-  		<ion-row>
-  			<ion-col col-3>Bitstamp</ion-col>
-  			<ion-col col-3>BitCoin</ion-col>
-  			<ion-col col-3>{{bitcoinBs?.last}}</ion-col>
-  			<ion-col col-3>{{bitcoinBs?.volume | number}}</ion-col>
+		<ion-row>
+  			<ion-col col-12 class="exchange">Bitstamp</ion-col>
   		</ion-row>
   		<ion-row>
-  			<ion-col col-3>Bitstamp</ion-col>
-  			<ion-col col-3>Ether</ion-col>
-  			<ion-col col-3>{{etherBs?.last}}</ion-col>
-  			<ion-col col-3>{{etherBs?.volume | number}}</ion-col>
+  			<ion-col col-4>BitCoin</ion-col>
+  			<ion-col col-4>{{bitcoinBs?.last}}</ion-col>
+  			<ion-col col-4>{{bitcoinBs?.volume | number}}</ion-col>
   		</ion-row>
   		<ion-row>
-  			<ion-col col-3>Bitstamp</ion-col>
-  			<ion-col col-3>LiteCoin</ion-col>
-  			<ion-col col-3>{{ltcBs?.last}}</ion-col>
-  			<ion-col col-3>{{ltcBs?.volume | number}}</ion-col>
+  			<ion-col col-4>Ether</ion-col>
+  			<ion-col col-4>{{etherBs?.last}}</ion-col>
+  			<ion-col col-4>{{etherBs?.volume | number}}</ion-col>
   		</ion-row>
   		<ion-row>
-  			<ion-col col-3>Bitstamp</ion-col>
-  			<ion-col col-3>Ripple</ion-col>
-  			<ion-col col-3>{{rippleBs?.last}}</ion-col>
-  			<ion-col col-3>{{rippleBs?.volume | number}}</ion-col>
+  			<ion-col col-4>LiteCoin</ion-col>
+  			<ion-col col-4>{{ltcBs?.last}}</ion-col>
+  			<ion-col col-4>{{ltcBs?.volume | number}}</ion-col>
   		</ion-row>
   		<ion-row>
-  			<ion-col col-3>Bitfinex</ion-col>
-  			<ion-col col-3>BitCoin</ion-col>
-  			<ion-col col-3>{{bitcoinBf?.last_price}}</ion-col>
-  			<ion-col col-3>{{bitcoinBf?.volume | number}}</ion-col>
+  			<ion-col col-4>Ripple</ion-col>
+  			<ion-col col-4>{{rippleBs?.last}}</ion-col>
+  			<ion-col col-4>{{rippleBs?.volume | number}}</ion-col>
   		</ion-row>
   		<ion-row>
-  			<ion-col col-3>Bitfinex</ion-col>
-  			<ion-col col-3>Ether</ion-col>
-  			<ion-col col-3>{{etherBf?.last_price}}</ion-col>
-  			<ion-col col-3>{{etherBf?.volume | number}}</ion-col>
+  			<ion-col col-12 class="exchange">Bitfinex</ion-col>
   		</ion-row>
   		<ion-row>
-  			<ion-col col-3>Bitfinex</ion-col>
-  			<ion-col col-3>LiteCoin</ion-col>
-  			<ion-col col-3>{{ltcBf?.last_price}}</ion-col>
-  			<ion-col col-3>{{ltcBf?.volume | number}}</ion-col>
+  			<ion-col col-4>BitCoin</ion-col>
+  			<ion-col col-4>{{bitcoinBf?.last_price}}</ion-col>
+  			<ion-col col-4>{{bitcoinBf?.volume | number}}</ion-col>
   		</ion-row>
   		<ion-row>
-  			<ion-col col-3>Bitfinex</ion-col>
-  			<ion-col col-3>Ripple</ion-col>
-  			<ion-col col-3>{{rippleBf?.last_price}}</ion-col>
-  			<ion-col col-3>{{rippleBf?.volume | number}}</ion-col>
+  			<ion-col col-4>Ether</ion-col>
+  			<ion-col col-4>{{etherBf?.last_price}}</ion-col>
+  			<ion-col col-4>{{etherBf?.volume | number}}</ion-col>
+  		</ion-row>
+  		<ion-row>
+  			<ion-col col-4>LiteCoin</ion-col>
+  			<ion-col col-4>{{ltcBf?.last_price}}</ion-col>
+  			<ion-col col-4>{{ltcBf?.volume | number}}</ion-col>
+  		</ion-row>
+  		<ion-row>
+  			<ion-col col-4>Ripple</ion-col>
+  			<ion-col col-4>{{rippleBf?.last_price}}</ion-col>
+  			<ion-col col-4>{{rippleBf?.volume | number}}</ion-col>
   		</ion-row>
   	</ion-grid>
 </ion-content>
