@@ -4,6 +4,7 @@ import { BitstampProvider } from '../../providers/bitstamp/bitstamp';
 import { BitfinexProvider } from '../../providers/bitfinex/bitfinex';
 import { QuoteBs } from '../../providers/common/quoteBs';
 import { QuoteBf } from '../../providers/common/quoteBf';
+import { OrderbookPage } from '../orderbook/orderbook';
 
 /**
  * Generated class for the QuotedetailPage page.
@@ -55,5 +56,8 @@ export class QuotedetailPage {
         });
     }
   }
-
+  
+  orderbook() :void {
+      this.navCtrl.push(OrderbookPage, this.navParams);
+  }
 }
