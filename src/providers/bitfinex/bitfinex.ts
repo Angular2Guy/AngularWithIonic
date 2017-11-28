@@ -7,11 +7,11 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/observable/throw';
 import { QuoteBf } from '../common/quoteBf';
-import { Utils } from './utils';
+import { Utils } from '../utils';
 import { OrderbookBf } from '../common/orderbookBf';
 
 @Injectable()
-export class BitfinexService {
+export class BitfinexProvider {
   private _reqOptionsArgs = { headers: new HttpHeaders().set( 'Content-Type', 'application/json' ) };
   private readonly _bitfinex = '/bitfinex';  
   BTCUSD = 'btcusd';

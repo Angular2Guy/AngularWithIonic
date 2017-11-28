@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { BitstampService } from '../../app/services/bitstamp.service';
-import { BitfinexService } from '../../app/services/bitfinex.service';
-import { QuoteBs } from '../../app/common/quoteBs';
-import { QuoteBf } from '../../app/common/quoteBf';
+import { BitstampProvider } from '../../providers/bitstamp/bitstamp';
+import { BitfinexProvider } from '../../providers/bitfinex/bitfinex';
+import { QuoteBs } from '../../providers/common/quoteBs';
+import { QuoteBf } from '../../providers/common/quoteBf';
 import { QuotedetailPage } from '../quotedetail/quotedetail';
 /**
  * Generated class for the QuotesPage page.
@@ -29,7 +29,7 @@ export class QuotesPage {
   rippleBf = <QuoteBf> {};
   
   
-  constructor(public navCtrl: NavController, public navParams: NavParams, private bitstampServ: BitstampService, private bitfinexServ: BitfinexService) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private bitstampServ: BitstampProvider, private bitfinexServ: BitfinexProvider) {
   }
 
   ionViewDidLoad() {

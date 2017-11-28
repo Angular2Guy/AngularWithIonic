@@ -3,7 +3,7 @@ import { NavController } from 'ionic-angular';
 import { SigninPage } from '../signin/signin';
 import { QuotesPage } from '../quotes/quotes';
 import * as CryptoJS from 'crypto-js';
-import { Userdata } from '../../app/common/userdata';
+import { Userdata } from '../../providers/common/userdata';
  
 @Component({
   selector: 'page-home',

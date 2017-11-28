@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import * as CryptoJS from 'crypto-js';
-import { Userdata } from '../../app/common/userdata';
+import { Userdata } from '../../providers/common/userdata';
 
 /**
  * Generated class for the SigninPage page.

@@ -7,11 +7,11 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/observable/throw';
 import { QuoteBs } from '../common/quoteBs';
-import { Utils } from './utils';
+import { Utils } from '../utils';
 import { OrderbookBs } from '../common/orderbookBs';
 
 @Injectable()
-export class BitstampService {    
+export class BitstampProvider {    
      
     private _reqOptionsArgs = { headers: new HttpHeaders().set( 'Content-Type', 'application/json' ) };
     private readonly _bitstamp = '/bitstamp';        
