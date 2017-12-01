@@ -9,8 +9,18 @@
 
 <ion-content padding>
 	<ion-grid>
-		<ion-row>
-  			<ion-col col-6>Buy/Sell</ion-col>
-  		</ion-row>
+		<form (ngSubmit)="onSubmit()" #obForm="ngForm">
+			<ion-row>
+	  			<ion-col col-6><input type="radio" name="buysell" [value]="1" [(ngModel)]="navParams.data.buysell"> Buy</ion-col>
+	  			<ion-col col-6><input type="radio" name="buysell" [value]="0" [(ngModel)]="navParams.data.buysell"> Sell</ion-col>  			
+	  		</ion-row>
+	  		<ion-row>
+	  			<ion-col col-6>Amount</ion-col>
+	  			<ion-col col-6><input type="number" [(ngModel)]="navParams.data.amount" name="amount" required></ion-col> 
+	  		</ion-row>
+	  		<button ion-button type="submit">show orderbook</button>
+  		</form>
+  		
   	</ion-grid>
+  	{{navParams.data | json }}
 </ion-content>

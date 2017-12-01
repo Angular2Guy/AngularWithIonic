@@ -39,7 +39,7 @@ export class QuotedetailPage {
     this.chartlabels = [];
     this.exchange = this.navParams.get('exchange');
     if('bitstamp' === this.exchange) {
-        console.log("bitstamp"+" "+this.navParams.get('currency'));
+        //console.log("bitstamp"+" "+this.navParams.get('currency'));
         this.bitstampServ.getCurrentQuote(this.navParams.get('currency')).subscribe(quote => this.quoteBs = quote);
         this.bitstampServ.getTodayQuotes(this.navParams.get('currency')).subscribe(quotes => {
             this.todayQuotesBs = quotes;
@@ -47,7 +47,7 @@ export class QuotedetailPage {
             this.chartdata = this.todayQuotesBs.map(quote => quote.last);
         });
     } else if('bitfinex' === this.exchange) {
-        console.log("bitfinex"+" "+this.navParams.get('currency'));
+        //console.log("bitfinex"+" "+this.navParams.get('currency'));
         this.bitfinexServ.getCurrentQuote(this.navParams.get('currency')).subscribe(quote => this.quoteBf = quote);
         this.bitfinexServ.getTodayQuotes(this.navParams.get('currency')).subscribe(quotes => {
             this.todayQuotesBf = quotes;
@@ -57,7 +57,7 @@ export class QuotedetailPage {
     }
   }
   
-  orderbook() :void {
+  orderbook() :void {      
       this.navCtrl.push(OrderbookPage, this.navParams);
   }
 }

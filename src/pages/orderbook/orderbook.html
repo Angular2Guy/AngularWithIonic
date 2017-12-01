@@ -8,7 +8,7 @@
 
 <ion-content padding>	
 	<ion-tabs>
-	    <ion-tab [root]="bitstamptabRoot" tabTitle="Bitstamp" ></ion-tab>
-	    <ion-tab [root]="bitfinextabRoot" tabTitle="Bitfinex" ></ion-tab>
+	    <ion-tab [root]="bitstamptabRoot" tabTitle="Bitstamp" [rootParams]="navParams"></ion-tab>
+	    <ion-tab [root]="bitfinextabRoot" tabTitle="Bitfinex" [rootParams]="navParams"></ion-tab>
 	</ion-tabs>
 </ion-content>

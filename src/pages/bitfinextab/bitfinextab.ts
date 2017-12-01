@@ -13,13 +13,24 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   selector: 'page-bitfinextab',
   templateUrl: 'bitfinextab.html',
 })
-export class BitfinextabPage {
-
+export class BitfinextabPage {  
+    
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad BitfinextabPage');
+    if(typeof this.navParams.get('buysell') === 'undefined' || this.navParams.get('buysell') === null) {
+        this.navParams.data.buysell = 1; 
+    } 
+    if(typeof this.navParams.get('amount') === 'undefined' || this.navParams.get('amount') === null) {
+        this.navParams.data.amount = 0;
+    }
   }
 
+  onSubmit() {
+      
+  }
+  
 }
+
