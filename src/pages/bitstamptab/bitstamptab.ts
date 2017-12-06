@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { BitstampProvider } from '../../providers/bitstamp/bitstamp';
+import { OrderbookBs } from '../../providers/common/orderbookBs';
 
 /**
  * Generated class for the BitstamptabPage page.
@@ -13,12 +15,11 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   selector: 'page-bitstamptab',
   templateUrl: 'bitstamptab.html',
 })
-export class BitstamptabPage {
-  
-  buysell = 1;
-  amount = 0;
+export class BitstamptabPage {    
     
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  orders: string[][] = [];
+    
+  constructor(public navCtrl: NavController, public navParams: NavParams, private service: BitstampProvider) {
   }
 
   ionViewDidLoad() {
@@ -32,7 +33,16 @@ export class BitstamptabPage {
   }
   
   onSubmit() {
-      this.navParams.data.buysell = this.buysell;
-      this.navParams.data.amount = this.amount;
+      this.service.getOrderbook(this.navParams.data.currency).subscribe(ord => this.orders = this.filterOrders(this.navParams.data.buysell ? ord.asks : ord.bids, this.navParams.data.amount));
+  }
+  
+  private filterOrders(orders: string[][], amount: number) : string[][] {
+      let myOrders: string[][] = [];
+      let sum = 0;
+      for(let i = 0;sum <= amount;i++) {
+          myOrders.push(orders[i]);          
+          sum += parseFloat(orders[i][1]);
+      }
+      return myOrders;
   }
 }

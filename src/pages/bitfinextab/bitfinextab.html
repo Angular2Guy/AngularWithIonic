@@ -20,7 +20,11 @@
 	  		</ion-row>
 	  		<button ion-button type="submit">show orderbook</button>
   		</form>
-  		
-  	</ion-grid>
-  	{{navParams.data | json }}
+		<ion-row *ngFor="let order of orders">
+			<ion-col col-3>Price:</ion-col>
+			<ion-col col-3>{{order.price}}</ion-col>
+			<ion-col col-3>Amount:</ion-col>
+			<ion-col col-3>{{order.amount}}</ion-col>
+		</ion-row>  		
+  	</ion-grid>  	
 </ion-content>
