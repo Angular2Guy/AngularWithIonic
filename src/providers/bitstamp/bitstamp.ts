@@ -12,7 +12,7 @@ import { OrderbookBs } from '../common/orderbookBs';
 
 @Injectable()
 export class BitstampProvider {    
-     
+        
     private _reqOptionsArgs = { headers: new HttpHeaders().set( 'Content-Type', 'application/json' ) };
     private readonly _bitstamp = '/bitstamp';        
     BTCUSD = 'btcusd';

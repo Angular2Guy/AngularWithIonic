@@ -5,6 +5,7 @@ import { BitfinexProvider } from '../../providers/bitfinex/bitfinex';
 import { QuoteBs } from '../../providers/common/quoteBs';
 import { QuoteBf } from '../../providers/common/quoteBf';
 import { QuotedetailPage } from '../quotedetail/quotedetail';
+import { SettingsPage } from '../settings/settings';
 /**
  * Generated class for the QuotesPage page.
  *
@@ -46,9 +47,13 @@ export class QuotesPage {
   
   showDetails(exchange: string, curr: string) : void {
       //console.log(exchange+" "+curr);
-      this.navCtrl.push(QuotedetailPage, {
-          exchange: exchange,
-          currency: curr});
+      this.navParams.data.exchange = exchange;
+      this.navParams.data.currency = curr;
+      this.navCtrl.push(QuotedetailPage, this.navParams);
+  }
+  
+  openSettings() {
+      this.navCtrl.push(SettingsPage, this.navParams);
   }
   
 }

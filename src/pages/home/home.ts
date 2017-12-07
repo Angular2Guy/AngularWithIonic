@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 import { SigninPage } from '../signin/signin';
 import { QuotesPage } from '../quotes/quotes';
 import * as CryptoJS from 'crypto-js';
@@ -13,7 +13,7 @@ export class HomePage {
   username: string;
   password: string;
   loginFailed = false;
-  constructor(public navCtrl: NavController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams) {
 
   }
   
@@ -22,7 +22,8 @@ export class HomePage {
       let hash = ud !== null ? CryptoJS.PBKDF2(this.password ,ud.salt,{ keySize: 256/32, iterations: 1200 }).toString() : null;
       if(ud !== null && hash === ud.hash) {
           this.loginFailed = false;
-          this.navCtrl.push(QuotesPage);
+          this.navParams.data.username = this.username;
+          this.navCtrl.push(QuotesPage, this.navParams);
       } else {          
           console.log(hash === null ? '' : hash +"-"+ud !== null ? ud.hash : '');
           this.loginFailed = true;

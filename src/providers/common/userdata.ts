@@ -4,5 +4,7 @@ export class Userdata {
 }
 
 export class Exchange {
+    public static readonly BITSTAMP = "bitstamp";
+    public static readonly BITFINEX = "bitfinex";
     constructor(public name: string, public token: string) {}
 }

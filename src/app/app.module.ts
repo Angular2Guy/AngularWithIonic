@@ -16,6 +16,7 @@ import { SigninPageModule } from '../pages/signin/signin.module';
 import { QuotesPageModule } from '../pages/quotes/quotes.module';
 import { QuotedetailPageModule } from '../pages/quotedetail/quotedetail.module';
 import { OrderbookPageModule } from '../pages/orderbook/orderbook.module';
+import { SettingsPageModule } from '../pages/settings/settings.module';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { BitstampProvider } from '../providers/bitstamp/bitstamp';
@@ -40,6 +41,7 @@ import { BitfinexProvider } from '../providers/bitfinex/bitfinex';
     QuotesPageModule,
     QuotedetailPageModule,
     OrderbookPageModule,
+    SettingsPageModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],

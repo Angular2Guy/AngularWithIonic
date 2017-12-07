@@ -13,7 +13,7 @@
 </ion-header>
 
 <ion-content padding>
-	<ion-grid>
+	<ion-grid>		
 		<ion-row>
   			<ion-col col-12 class="exchange">Bitstamp</ion-col>
   		</ion-row>
@@ -59,6 +59,11 @@
   			<ion-col col-4>Ripple</ion-col>
   			<ion-col col-4>{{rippleBf?.last_price}}</ion-col>
   			<ion-col col-4>{{rippleBf?.volume | number}}</ion-col>
+  		</ion-row>
+  		<ion-row>
+  			<ion-col col-12>
+  				<button ion-button (click)="openSettings()">Settings</button>
+  			</ion-col>
   		</ion-row>
   	</ion-grid>
 </ion-content>
