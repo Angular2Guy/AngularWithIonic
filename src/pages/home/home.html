@@ -19,10 +19,14 @@
 	  	<ion-item *ngIf="loginFailed" class="errorMsg">
 	  		Login Failed
 	  	</ion-item>
+  		<ion-item>
+  			<ion-label>
+  				<div>
+	  			<button ion-button class="btnLeft" (click)="login()" [disabled]="!myForm.form.valid">Login</button> 
+	  			<button ion-button class="btnRight" (click)="signin()">Signin</button>
+	  			</div>
+	  		</ion-label>
+	  	</ion-item>	
 	  </ion-list>
   </form>
-	  <div padding>
-	  	<button ion-button (click)="login()" [disabled]="!myForm.form.valid">Login</button> 
-	  	<button ion-button (click)="signin()">Signin</button>
-	  </div>
 </ion-content>
