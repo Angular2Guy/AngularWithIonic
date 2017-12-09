@@ -15,13 +15,29 @@
 
 <ion-content padding>
 	<ion-grid>
-		<form (ngSubmit)="onSubmit()" #obForm="ngForm">
+		<form (ngSubmit)="onSubmit()" #myForm="ngForm">
 			<ion-row>
+	  			<ion-col col-6>
+	  				Bitstamp id: 
+	  			</ion-col>
+	  			<ion-col col-6>
+	  				<input type="password" [(ngModel)]="bitstampId" name="bitstampid"> 
+	  			</ion-col>
+	  		</ion-row>
+	  		<ion-row>
 	  			<ion-col col-6>
 	  				Bitstamp key: 
 	  			</ion-col>
 	  			<ion-col col-6>
 	  				<input type="password" [(ngModel)]="bitstampKey" name="bitstampkey"> 
+	  			</ion-col>
+	  		</ion-row>
+	  		<ion-row>
+	  			<ion-col col-6>
+	  				Bitfinex Id: 
+	  			</ion-col>
+	  			<ion-col col-6>
+	  				<input type="password" [(ngModel)]="bitfinexId" name="bitfinexid"> 
 	  			</ion-col>
 	  		</ion-row>
 	  		<ion-row>
@@ -37,10 +53,15 @@
 	  				Password: 
 	  			</ion-col>
 	  			<ion-col col-6>
-	  				<input type="password" [(ngModel)]="password" name="password" required> 
-	  			</ion-col>
+	  				<input type="password" [(ngModel)]="password" name="password" required #pwd="ngModel"> 
+	  			</ion-col>	  			
 	  		</ion-row>
-	  		<button ion-button type="submit">save</button>
+	  		<ion-row *ngIf="!myForm.form.valid">
+	  			<ion-col col-12 class="errorMsg">
+	  				Password required 
+	  			</ion-col>	  				  			
+	  		</ion-row>
+	  		<button ion-button type="submit" [disabled]="!myForm.form.valid">save</button>
   		</form>
-  	</ion-grid>
+  	</ion-grid>  	
 </ion-content>
