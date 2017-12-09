@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Userdata, Exchange } from '../../providers/common/userdata';
-
+import * as CryptoJS from 'crypto-js';
 /**
  * Generated class for the SettingsPage page.
  *
@@ -17,7 +17,8 @@ import { Userdata, Exchange } from '../../providers/common/userdata';
 export class SettingsPage {
   
   bitstampKey: string = null;
-  bitfinexKey: string = null;  
+  bitfinexKey: string = null;
+  password: string = null;
     
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
@@ -32,10 +33,12 @@ export class SettingsPage {
   }
   
   onSubmit() {
-    let ud:Userdata = <Userdata> JSON.parse(localStorage.getItem(this.navParams.data.username));
+    let ud:Userdata = <Userdata> JSON.parse(localStorage.getItem(this.navParams.data.username));    
+    let bfkey = CryptoJS.AES.encrypt(this.bitfinexKey, this.password+ud.salt.slice(0, 20)).toString();
+    let bskey = CryptoJS.AES.encrypt(this.bitstampKey, this.password+ud.salt.slice(0, 20)).toString();       
     ud.keys = [];
-    ud.keys.push(new Exchange(Exchange.BITFINEX, this.bitfinexKey));
-    ud.keys.push(new Exchange(Exchange.BITSTAMP, this.bitstampKey));    
+    ud.keys.push(new Exchange(Exchange.BITFINEX, bfkey));
+    ud.keys.push(new Exchange(Exchange.BITSTAMP, bskey));    
     localStorage.setItem(this.navParams.data.username, JSON.stringify(ud));
     
   }
