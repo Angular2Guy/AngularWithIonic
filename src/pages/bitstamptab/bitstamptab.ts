@@ -18,6 +18,7 @@ import { OrderbookBs } from '../../providers/common/orderbookBs';
 export class BitstamptabPage {    
     
   orders: string[][] = [];
+  password = "";
     
   constructor(public navCtrl: NavController, public navParams: NavParams, private service: BitstampProvider) {
   }
@@ -30,14 +31,22 @@ export class BitstamptabPage {
     if(typeof this.navParams.get('amount') === 'undefined' || this.navParams.get('amount') === null) {
         this.navParams.data.amount = 0;
     }
+    if(typeof this.navParams.get('limit') === 'undefined' || this.navParams.get('limit') === null) {
+        this.navParams.data.limit = 0;
+    }    
   }
   
   onSubmit() {
       this.service.getOrderbook(this.navParams.data.currency).subscribe(ord => this.orders = this.filterOrders(this.navParams.data.buysell ? ord.asks : ord.bids, this.navParams.data.amount));
   }
   
+  sendOrder() {
+      console.log("sendOrder");
+  }
+  
   private filterOrders(orders: string[][], amount: number) : string[][] {
       let myOrders: string[][] = [];
+      if(orders.length === 0) return myOrders;
       let sum = 0;
       for(let i = 0;sum <= amount;i++) {
           myOrders.push(orders[i]);          

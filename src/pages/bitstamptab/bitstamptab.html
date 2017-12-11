@@ -9,7 +9,7 @@
 
 <ion-content padding>
 		<ion-grid>
-		<form (ngSubmit)="onSubmit()" #obForm="ngForm">
+			<form (ngSubmit)="onSubmit()" #obForm="ngForm">
 			<ion-row>
 	  			<ion-col col-6><input type="radio" name="buysell" [value]="1" [(ngModel)]="navParams.data.buysell"> Buy</ion-col>
 	  			<ion-col col-6><input type="radio" name="buysell" [value]="0" [(ngModel)]="navParams.data.buysell"> Sell</ion-col>  			
@@ -18,8 +18,21 @@
 	  			<ion-col col-6>Amount</ion-col>
 	  			<ion-col col-6><input type="number" [(ngModel)]="navParams.data.amount" name="amount" required></ion-col> 
 	  		</ion-row>
-	  		<button ion-button type="submit">show orderbook</button>
-  		</form>
+	  		<ion-row>
+	  			<ion-col col-6>Limit</ion-col>
+	  			<ion-col col-6><input type="number" [(ngModel)]="navParams.data.limit" name="limit"></ion-col> 
+	  		</ion-row>
+	  		<ion-row>
+	  			<ion-col col-6>Password</ion-col>
+	  			<ion-col col-6><input type="password" [(ngModel)]="password" name="password"></ion-col> 
+	  		</ion-row>
+  			</form>
+	  		<ion-row>
+	  			<ion-col col-12>
+	  				<button ion-button (click)="onSubmit()">show orderbook</button>
+	  				<button ion-button (click)="sendOrder()" [disabled]="!navParams.data.amount > 0 || !this.navParams.data.limit > 0 || !this.password.length > 0" style="float: right;">send order</button>
+	  			</ion-col>
+	  		</ion-row>
   		<ion-row *ngFor="let order of orders">
 			<ion-col col-3>Price:</ion-col>
 			<ion-col col-3>{{order[0]}}</ion-col>
