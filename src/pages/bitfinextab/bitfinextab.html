@@ -27,6 +27,11 @@
 	  			<ion-col col-6><input type="password" [(ngModel)]="password" name="password"></ion-col> 
 	  		</ion-row>
   			</form>
+  			<ion-row>
+	  			<ion-col col-12 *ngIf="wrongPW">
+					Password wrong	  				
+	  			</ion-col>
+	  		</ion-row>
 	  		<ion-row>
 	  			<ion-col col-12>
 	  				<button ion-button (click)="onSubmit()">show orderbook</button>
@@ -34,7 +39,7 @@
 	  			</ion-col>
 	  		</ion-row>
 	  		<ion-row>
-	  			<ion-col col-12>
+	  			<ion-col col-12 *ngIf="myOrder != null">
 					{{ myOrder | json }}	  				
 	  			</ion-col>
 	  		</ion-row>

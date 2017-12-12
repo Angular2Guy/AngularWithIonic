@@ -61,6 +61,11 @@
 	  				Password required 
 	  			</ion-col>	  				  			
 	  		</ion-row>
+	  		<ion-row *ngIf="wrongPW">
+	  			<ion-col col-12 class="errorMsg">
+	  				Password wrong 
+	  			</ion-col>	  				  			
+	  		</ion-row>
 	  		<button ion-button type="submit" [disabled]="!myForm.form.valid">save</button>
   		</form>
   	</ion-grid>  	

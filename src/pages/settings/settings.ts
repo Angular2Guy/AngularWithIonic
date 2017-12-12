@@ -22,6 +22,7 @@ export class SettingsPage {
   bitfinexId: string = null;
   bitfinexKey: string = null;
   password: string = null;
+  wrongPW = false;
     
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
@@ -40,7 +41,14 @@ export class SettingsPage {
   }     
   
   onSubmit() {
+    this.wrongPW = false;
     let ud:Userdata = <Userdata> JSON.parse(localStorage.getItem(this.navParams.data.username));
+    let hash = ud !== null ? CryptoJS.PBKDF2(this.password ,ud.salt,{ keySize: 256/32, iterations: 1200 }).toString() : null;
+    if(ud === null || !(hash === ud.hash)) {
+        console.log("Wrong password.");
+        this.wrongPW = true;
+        return;
+    }
     let bfid = CryptoJS.AES.encrypt(this.bitfinexId, this.password).toString();
     let bfkey = CryptoJS.AES.encrypt(this.bitfinexKey, this.password).toString();
     let bsid = CryptoJS.AES.encrypt(this.bitstampId, this.password).toString();
