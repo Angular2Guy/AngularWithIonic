@@ -13,6 +13,10 @@
     {
       "path": "/bitfinex",
       "proxyUrl": "http://localhost:8080/bitfinex"
+    },
+    {
+      "path": "/bitfinex2",
+      "proxyUrl": "https://api.bitfinex.com"
     }
   ]
 }

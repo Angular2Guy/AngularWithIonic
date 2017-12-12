@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Userdata, Exchange } from '../../providers/common/userdata';
 import * as CryptoJS from 'crypto-js';
+
 /**
  * Generated class for the SettingsPage page.
  *

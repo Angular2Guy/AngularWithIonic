@@ -9,11 +9,14 @@ import 'rxjs/add/observable/throw';
 import { QuoteBf } from '../common/quoteBf';
 import { Utils } from '../utils';
 import { OrderbookBf } from '../common/orderbookBf';
+import { OrderBf } from '../common/orderBf';
+import * as CryptoJS from 'crypto-js';
 
 @Injectable()
 export class BitfinexProvider {
   private _reqOptionsArgs = { headers: new HttpHeaders().set( 'Content-Type', 'application/json' ) };
   private readonly _bitfinex = '/bitfinex';  
+  private readonly _bitfinex2 = '/bitfinex2';
   BTCUSD = 'btcusd';
   ETHUSD = 'ethusd';
   LTCUSD = 'ltcusd';
@@ -34,5 +37,22 @@ export class BitfinexProvider {
 
   getOrderbook(currencypair: string): Observable<OrderbookBf> {
       return this.http.get(this._bitfinex+'/'+currencypair+'/orderbook/', this._reqOptionsArgs).catch(this._utils.handleError);
+  }
+  
+  postOrder(key: string, secret: string, currpair: string, amount: number, limit: number, buysell: boolean, ordertype: string): Observable<OrderBf> {
+          const nonce = Date.now().toString()
+          const body = {
+            request: '/v1/account_infos',
+            nonce
+          }
+          const payload = btoa(JSON.stringify(body));              
+          const signature = CryptoJS.HmacSHA384(payload, secret).toString(CryptoJS.enc.Hex);          
+          let reqOptionsArgs = { headers: new HttpHeaders().set( 'Content-Type', 'application/json' )
+                                                      .set('X-BFX-APIKEY', key)
+                                                      .set('X-BFX-PAYLOAD', payload)
+                                                      .set('X-BFX-SIGNATURE', signature)};          
+      
+      
+      return this.http.post(this._bitfinex2+'/v1/account_infos', body, reqOptionsArgs).catch(this._utils.handleError);
   }
 }

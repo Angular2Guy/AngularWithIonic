@@ -1,9 +1,9 @@
 export interface OrderbookBf {
-    bids: OrderBf[];
-    asks: OrderBf[];
+    bids: OrderObBf[];
+    asks: OrderObBf[];
 }
 
-export interface OrderBf {
+export interface OrderObBf {
     price: string;
     amount: string;
     timestamp: Date;

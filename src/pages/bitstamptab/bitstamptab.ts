@@ -18,7 +18,7 @@ import { OrderbookBs } from '../../providers/common/orderbookBs';
 export class BitstamptabPage {    
     
   orders: string[][] = [];
-  password = "";
+  password = "";  
     
   constructor(public navCtrl: NavController, public navParams: NavParams, private service: BitstampProvider) {
   }
@@ -36,7 +36,7 @@ export class BitstamptabPage {
     }    
   }
   
-  onSubmit() {
+  onSubmit() {      
       this.service.getOrderbook(this.navParams.data.currency).subscribe(ord => this.orders = this.filterOrders(this.navParams.data.buysell ? ord.asks : ord.bids, this.navParams.data.amount));
   }
   

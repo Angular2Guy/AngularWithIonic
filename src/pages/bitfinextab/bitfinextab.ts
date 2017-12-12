@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { BitfinexProvider } from '../../providers/bitfinex/bitfinex';
-import { OrderBf } from '../../providers/common/orderbookBf';
+import { OrderObBf } from '../../providers/common/orderbookBf';
+import { OrderBf } from '../../providers/common/orderBf';
+import * as CryptoJS from 'crypto-js';
+import { Userdata, Exchange } from '../../providers/common/userdata';
 
 /**
  * Generated class for the BitfinextabPage page.
@@ -16,8 +19,9 @@ import { OrderBf } from '../../providers/common/orderbookBf';
   templateUrl: 'bitfinextab.html',
 })
 export class BitfinextabPage {  
-  orders: OrderBf[] = [];
+  orders: OrderObBf[] = [];
   password = "";
+  myOrder: OrderBf = null;
     
   constructor(public navCtrl: NavController, public navParams: NavParams, private service: BitfinexProvider) {
   }
@@ -39,12 +43,16 @@ export class BitfinextabPage {
       this.service.getOrderbook(this.navParams.get('currency')).subscribe(ob => this.orders = this.filterOrders(this.navParams.data.buysell ? ob.asks : ob.bids, this.navParams.data.amount));
   }
   
-  sendOrder() {
-      console.log("sendOrder");
+  sendOrder() {      
+      let ud:Userdata = <Userdata> JSON.parse(localStorage.getItem(this.navParams.data.username));
+      let myKey = ud.keys.filter(exch => exch.name === Exchange.BITFINEX)[0];      
+      let mySecret = CryptoJS.AES.decrypt(myKey.token, this.password).toString(CryptoJS.enc.Utf8);
+      let myId = CryptoJS.AES.decrypt(myKey.id, this.password).toString(CryptoJS.enc.Utf8);      
+      this.service.postOrder(myId,mySecret, this.navParams.get('currency'), this.navParams.get('amount'), this.navParams.get('limit'), this.navParams.get('buysell'), 'limit').subscribe(ord => this.myOrder = ord);
   }
   
-  private filterOrders(orders: OrderBf[], amount: number) : OrderBf[] {
-       let myOrders: OrderBf[] = [];
+  private filterOrders(orders: OrderObBf[], amount: number) : OrderObBf[] {
+       let myOrders: OrderObBf[] = [];
        if(orders.length === 0) return myOrders;
        let sum = 0;
        for(let i = 0;sum <= amount;i++) {
