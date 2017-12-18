@@ -14,7 +14,8 @@ import { OrderbookBs } from '../common/orderbookBs';
 export class BitstampProvider {    
         
     private _reqOptionsArgs = { headers: new HttpHeaders().set( 'Content-Type', 'application/json' ) };
-    private readonly _bitstamp = '/bitstamp';        
+    private readonly _bitstamp = '/bitstamp';
+    private readonly _bitstamp2 = '/bitstamp2';
     BTCUSD = 'btcusd';
     ETHUSD = 'ethusd';
     LTCUSD = 'ltcusd';
@@ -33,6 +34,6 @@ export class BitstampProvider {
     }
     
     getOrderbook(currencypair: string): Observable<OrderbookBs> {
-        return this.http.get(this._bitstamp+'/'+currencypair+'/orderbook/', this._reqOptionsArgs).catch(this._utils.handleError);
+        return this.http.get(this._bitstamp2+'/api/v2/order_book/'+currencypair+'/', this._reqOptionsArgs).catch(this._utils.handleError);
     }
 }

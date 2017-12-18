@@ -11,6 +11,10 @@
       "proxyUrl": "http://localhost:8080/bitstamp"
     },
     {
+      "path": "/bitstamp2",
+      "proxyUrl": "https://www.bitstamp.net"
+    },
+    {
       "path": "/bitfinex",
       "proxyUrl": "http://localhost:8080/bitfinex"
     },

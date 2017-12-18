@@ -36,7 +36,7 @@ export class BitfinexProvider {
   }
 
   getOrderbook(currencypair: string): Observable<OrderbookBf> {
-      return this.http.get(this._bitfinex+'/'+currencypair+'/orderbook/', this._reqOptionsArgs).catch(this._utils.handleError);
+      return this.http.get(this._bitfinex2+'/v1/book/'+currencypair, this._reqOptionsArgs).catch(this._utils.handleError);
   }
   
   postOrder(key: string, secret: string, currpair: string, amount: number, limit: number, buysell: boolean, ordertype: string): Observable<OrderBf> {
