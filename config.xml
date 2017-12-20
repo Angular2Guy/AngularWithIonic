@@ -2,7 +2,7 @@
 <widget id="io.ionic.starter" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Blockchaintrader</name>
     <description>The app to trade crytocurrencies on multiple exchanges.</description>
-    <author email="hi@ionicframework" href="http://ionicframework.com/">Ionic Framework Team</author>
+    <author email="blockchaintrader@svenloesekann.de" href="http://svenloesekann.de/">Sven Loesekann</author>
     <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />

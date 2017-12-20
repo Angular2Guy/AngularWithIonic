@@ -15,8 +15,10 @@ import * as CryptoJS from 'crypto-js';
 @Injectable()
 export class BitfinexProvider {
   private _reqOptionsArgs = { headers: new HttpHeaders().set( 'Content-Type', 'application/json' ) };
-  private readonly _bitfinex = '/bitfinex';  
-  private readonly _bitfinex2 = '/bitfinex2';
+//  private readonly _bitfinex = '/bitfinex';  
+//  private readonly _bitfinex2 = '/bitfinex2';
+  private readonly _bitfinex = 'http://h2751098.stratoserver.net:8080/bitfinex';
+  private readonly _bitfinex2 = 'https://api.bitfinex.com';
   BTCUSD = 'btcusd';
   ETHUSD = 'ethusd';
   LTCUSD = 'ltcusd';

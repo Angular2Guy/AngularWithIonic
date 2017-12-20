@@ -8,7 +8,7 @@
   "proxies": [
     {
       "path": "/bitstamp",
-      "proxyUrl": "http://localhost:8080/bitstamp"
+      "proxyUrl": "http://h2751098.stratoserver.net:8080/bitstamp"
     },
     {
       "path": "/bitstamp2",
@@ -16,7 +16,7 @@
     },
     {
       "path": "/bitfinex",
-      "proxyUrl": "http://localhost:8080/bitfinex"
+      "proxyUrl": "http://h2751098.stratoserver.net:8080/bitfinex"
     },
     {
       "path": "/bitfinex2",
