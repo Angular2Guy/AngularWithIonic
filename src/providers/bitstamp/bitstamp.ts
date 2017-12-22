@@ -16,7 +16,7 @@ export class BitstampProvider {
     private _reqOptionsArgs = { headers: new HttpHeaders().set( 'Content-Type', 'application/json' ) };
 //    private readonly _bitstamp = '/bitstamp';
 //    private readonly _bitstamp2 = '/bitstamp2';
-    private readonly _bitstamp = 'http://h2751098.stratoserver.net:8080/bitstamp';
+    private readonly _bitstamp = 'https://svenloesekann.de:8443/bitstamp';
     private readonly _bitstamp2 = 'https://www.bitstamp.net';
     BTCUSD = 'btcusd';
     ETHUSD = 'ethusd';
