@@ -15,10 +15,10 @@ import * as CryptoJS from 'crypto-js';
 @Injectable()
 export class BitfinexProvider {
   private _reqOptionsArgs = { headers: new HttpHeaders().set( 'Content-Type', 'application/json' ) };
-//  private readonly _bitfinex = '/bitfinex';  
-//  private readonly _bitfinex2 = '/bitfinex2';
-  private readonly _bitfinex = 'https://svenloesekann.de:8443/bitfinex';
-  private readonly _bitfinex2 = 'https://api.bitfinex.com';
+  private readonly _bitfinex = '/bitfinex';  
+  private readonly _bitfinex2 = '/bitfinex2';
+//  private readonly _bitfinex = 'https://svenloesekann.de:8443/bitfinex';
+//  private readonly _bitfinex2 = 'https://api.bitfinex.com';
   BTCUSD = 'btcusd';
   ETHUSD = 'ethusd';
   LTCUSD = 'ltcusd';
@@ -42,11 +42,11 @@ export class BitfinexProvider {
   }
   
   postOrder(key: string, secret: string, currpair: string, amount: number, limit: number, buysell: boolean, ordertype: string): Observable<OrderBf> {
-          const nonce = Date.now().toString()
+          const nonce = Date.now().toString();
           const body = {
             request: '/v1/account_infos',
             nonce
-          }
+          };
           const payload = btoa(JSON.stringify(body));              
           const signature = CryptoJS.HmacSHA384(payload, secret).toString(CryptoJS.enc.Hex);          
           let reqOptionsArgs = { headers: new HttpHeaders().set( 'Content-Type', 'application/json' )

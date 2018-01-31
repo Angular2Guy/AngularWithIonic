@@ -6,6 +6,7 @@ import { QuoteBs } from '../../providers/common/quoteBs';
 import { QuoteBf } from '../../providers/common/quoteBf';
 import { QuotedetailPage } from '../quotedetail/quotedetail';
 import { SettingsPage } from '../settings/settings';
+import { OrdersPage } from '../orders/orders';
 /**
  * Generated class for the QuotesPage page.
  *
@@ -56,4 +57,7 @@ export class QuotesPage {
       this.navCtrl.push(SettingsPage, this.navParams);
   }
   
+  openOrders() {
+      this.navCtrl.push(OrdersPage, this.navParams);
+  }
 }

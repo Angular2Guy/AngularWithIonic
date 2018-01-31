@@ -8,7 +8,7 @@
   "proxies": [
     {
       "path": "/bitstamp",
-      "proxyUrl": "http://h2751098.stratoserver.net:8080/bitstamp"
+      "proxyUrl": "https://svenloesekann.de:8443/bitstamp"
     },
     {
       "path": "/bitstamp2",
@@ -16,7 +16,7 @@
     },
     {
       "path": "/bitfinex",
-      "proxyUrl": "http://h2751098.stratoserver.net:8080/bitfinex"
+      "proxyUrl": "https://svenloesekann.de:8443/bitfinex"
     },
     {
       "path": "/bitfinex2",

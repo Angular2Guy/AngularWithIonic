@@ -14,6 +14,7 @@ import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 import { SigninPageModule } from '../pages/signin/signin.module';
 import { QuotesPageModule } from '../pages/quotes/quotes.module';
+import { OrdersPageModule } from '../pages/orders/orders.module';
 import { QuotedetailPageModule } from '../pages/quotedetail/quotedetail.module';
 import { OrderbookPageModule } from '../pages/orderbook/orderbook.module';
 import { SettingsPageModule } from '../pages/settings/settings.module';
@@ -42,6 +43,7 @@ import { BitfinexProvider } from '../providers/bitfinex/bitfinex';
     QuotedetailPageModule,
     OrderbookPageModule,
     SettingsPageModule,
+    OrdersPageModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
