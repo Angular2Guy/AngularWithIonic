@@ -22,7 +22,7 @@ import { OpenOrderBs } from '../../providers/common/openorderBs';
 export class OrdersPage {
   password: string;
   wrongPW = false;
-  openOrdersBs: Observable<OpenOrderBs>;
+  openOrdersBs: Observable<OpenOrderBs[]>;
     
   constructor(public navCtrl: NavController, public navParams: NavParams, private bitstampServ: BitstampProvider, private bitfinexServ: BitfinexProvider) {
   }
@@ -45,5 +45,9 @@ export class OrdersPage {
       let mySecret = CryptoJS.AES.decrypt( myKey.token, this.password ).toString( CryptoJS.enc.Utf8 );
       let myId = CryptoJS.AES.decrypt( myKey.id, this.password ).toString( CryptoJS.enc.Utf8 );
       this.openOrdersBs =  this.bitstampServ.getOpenOrders(myKey.userid, myId, mySecret);      
+  }
+  
+  cancelOrder(id: string) {
+      console.log(id);
   }
 }

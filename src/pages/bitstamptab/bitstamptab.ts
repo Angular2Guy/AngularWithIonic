@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { BitstampProvider } from '../../providers/bitstamp/bitstamp';
 import { OrderbookBs } from '../../providers/common/orderbookBs';
+import { Userdata, Exchange } from "../../providers/common/userdata";
+import * as CryptoJS from 'crypto-js';
 
 /**
  * Generated class for the BitstamptabPage page.
@@ -19,6 +21,7 @@ export class BitstamptabPage {
     
   orders: string[][] = [];
   password = "";  
+  wrongPW = false;
     
   constructor(public navCtrl: NavController, public navParams: NavParams, private service: BitstampProvider) {
   }
@@ -31,6 +34,9 @@ export class BitstamptabPage {
     if(typeof this.navParams.get('amount') === 'undefined' || this.navParams.get('amount') === null) {
         this.navParams.data.amount = 0;
     }
+    if(typeof this.navParams.get('price') === 'undefined' || this.navParams.get('price') === null) {
+        this.navParams.data.price = 0;
+    }
     if(typeof this.navParams.get('limit') === 'undefined' || this.navParams.get('limit') === null) {
         this.navParams.data.limit = 0;
     }    
@@ -41,6 +47,18 @@ export class BitstamptabPage {
   }
   
   sendOrder() {
+      this.wrongPW = false;
+      let ud: Userdata = <Userdata>JSON.parse( localStorage.getItem( this.navParams.data.username ) );
+      let hash = ud !== null ? CryptoJS.PBKDF2( this.password, ud.salt, { keySize: 256 / 32, iterations: 1200 } ).toString() : null;
+      if ( ud === null || !( hash === ud.hash ) ) {
+          console.log( "Wrong password." );
+          this.wrongPW = true;
+          return;
+      }
+      let myKey = ud.keys.filter( exch => exch.name === Exchange.BITSTAMP )[0];
+      let mySecret = CryptoJS.AES.decrypt( myKey.token, this.password ).toString( CryptoJS.enc.Utf8 );
+      let myId = CryptoJS.AES.decrypt( myKey.id, this.password ).toString( CryptoJS.enc.Utf8 );      
+      this.service.postOrder(myKey.userid, myId, mySecret, this.navParams.data.currency, this.navParams.data.amount, this.navParams.data.price, this.navParams.data.limit, this.navParams.data.buysell).subscribe(result => console.log(result));
       console.log("sendOrder");
   }
   

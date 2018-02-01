@@ -41,15 +41,39 @@ export class BitstampProvider {
         return this.http.get(this._bitstamp2+'/api/v2/order_book/'+currencypair+'/', this._reqOptionsArgs).catch(this._utils.handleError);
     }
     
-    getOpenOrders(customerId: string, key: string, secret: string): Observable<OpenOrderBs> {
+    private buildCommonBody(customerId: string, key: string, secret: string): string {
         const nonce = Date.now().toString();
         const payload = nonce + customerId + key;           
         const signature = CryptoJS.HmacSHA256(payload, secret).toString(CryptoJS.enc.Hex).toUpperCase();
-//        const signature = CryptoJS.HmacSHA256('hallo123', 'teststring').toString(CryptoJS.enc.Hex).toUpperCase();
-        let reqOptionsArgs = { headers: new HttpHeaders().set( "content-type", "application/x-www-form-urlencoded").set(
-                "accept", "application/json" )};            
         let body = 'key=' + key+ '&signature='+ signature+ '&nonce='+ nonce;
-//        let body = "key=eqOReHeb9vU0ymWhetM8A3VTHPlkJil5&signature=B0A15C933A84C3101AB2A3758F2B3A7D673D51B877898189359254397E698FF3&nonce=1517428816789";
-        return this.http.post(this._bitstamp2+'/api/v2/open_orders/btcusd/', body, reqOptionsArgs).catch(this._utils.handleError);
+        return body;
+    }
+    
+    private buildCommonOptions(): any {
+        let reqOptionsArgs = { headers: new HttpHeaders()
+            .set( "content-type", "application/x-www-form-urlencoded")
+            .set("accept", "application/json" )};
+        return reqOptionsArgs;
+    }
+    
+    getOpenOrders(customerId: string, key: string, secret: string): Observable<OpenOrderBs[]> {
+//        const nonce = Date.now().toString();
+//        const payload = nonce + customerId + key;           
+//        const signature = CryptoJS.HmacSHA256(payload, secret).toString(CryptoJS.enc.Hex).toUpperCase();
+//        let reqOptionsArgs = { headers: new HttpHeaders().set( "content-type", "application/x-www-form-urlencoded").set(
+//                "accept", "application/json" )};            
+//        let body = 'key=' + key+ '&signature='+ signature+ '&nonce='+ nonce;
+        let reqOptionsArgs = this.buildCommonOptions();
+        let body = this.buildCommonBody(customerId, key, secret);
+        return this.http.post(this._bitstamp2+'/api/v2/open_orders/all/', body, reqOptionsArgs).catch(this._utils.handleError);
+    }
+    
+    postOrder(customerId: string, key: string, secret: string, pair: string, amount: number, price: number, limit: number, buysell: number): Observable<OrderBs> {
+        let reqOptionsArgs = this.buildCommonOptions();
+        let body = this.buildCommonBody(customerId, key, secret);
+        body = body + '&amount=' + amount + '&price=' + price + '&limit_price=' + limit;
+        console.log(body);
+        let url = this._bitstamp2+'/api/v2/'+(buysell === 1 ? 'buy' : 'sell')+'/'+pair+'/';        
+        return this.http.post(url, body, reqOptionsArgs).catch(this._utils.handleError);
     }
 }
