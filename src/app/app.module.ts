@@ -22,6 +22,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { BitstampProvider } from '../providers/bitstamp/bitstamp';
 import { BitfinexProvider } from '../providers/bitfinex/bitfinex';
+import { MetadataProvider } from '../providers/metadata/metadata';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,8 @@ import { BitfinexProvider } from '../providers/bitfinex/bitfinex';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     BitstampProvider,
-    BitfinexProvider
+    BitfinexProvider,
+    MetadataProvider
   ]
 })
 export class AppModule {}
