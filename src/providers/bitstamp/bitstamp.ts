@@ -10,6 +10,7 @@ import { QuoteBs } from '../common/quoteBs';
 import { Utils } from '../utils';
 import { OrderbookBs } from '../common/orderbookBs';
 import { OpenOrderBs } from '../common/openorderBs';
+import { CancelOrderBs } from '../common/cancelorderBs';
 import * as CryptoJS from 'crypto-js';
  
 @Injectable()
@@ -72,8 +73,16 @@ export class BitstampProvider {
         let reqOptionsArgs = this.buildCommonOptions();
         let body = this.buildCommonBody(customerId, key, secret);
         body = body + '&amount=' + amount + '&price=' + price + '&limit_price=' + limit;
-        console.log(body);
+//        console.log(body);
         let url = this._bitstamp2+'/api/v2/'+(buysell === 1 ? 'buy' : 'sell')+'/'+pair+'/';        
         return this.http.post(url, body, reqOptionsArgs).catch(this._utils.handleError);
+    }
+    
+    cancelOrder(customerId: string, key: string, secret: string, orderId: number): Observable<CancelOrderBs> {
+        let reqOptionsArgs = this.buildCommonOptions();
+        let body = this.buildCommonBody(customerId, key, secret);
+        body = body + '&id=' + orderId;
+        let url = this._bitstamp2 + '/api/v2/cancel_order/';
+        return this.http.post(url, body,reqOptionsArgs).catch(this._utils.handleError);
     }
 }
