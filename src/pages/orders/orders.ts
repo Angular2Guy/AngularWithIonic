@@ -7,6 +7,7 @@ import * as CryptoJS from 'crypto-js';
 import { Userdata, Exchange } from '../../providers/common/userdata';
 import { Observable } from 'rxjs/Observable';
 import { OpenOrderBs } from '../../providers/common/openorderBs';
+import { OpenOrderBf } from '../../providers/common/openorderBf';
 
 /**
  * Generated class for the OrdersPage page.
@@ -24,6 +25,7 @@ export class OrdersPage {
   password: string;
   wrongPW = false;
   openOrdersBs: Observable<OpenOrderBs[]>;
+  openOrdersBf: Observable<OpenOrderBf[]>;
     
   constructor(public navCtrl: NavController, public navParams: NavParams, private bitstampServ: BitstampProvider, private bitfinexServ: BitfinexProvider, private metadata: MetadataProvider) {
   }
@@ -31,7 +33,8 @@ export class OrdersPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad OrdersPage');
     this.password = this.metadata.password;
-    this.getOrdersBs();    
+    this.getOrdersBs(); 
+    this.getOrdersBf();
   }
 
   getOrdersBs() {
@@ -57,10 +60,21 @@ export class OrdersPage {
   }
   
   getOrdersBf() {
-      
+      let ud: Userdata = <Userdata>JSON.parse( localStorage.getItem( this.navParams.data.username ) );
+      let hash = ud !== null ? CryptoJS.PBKDF2( this.password, ud.salt, { keySize: 256 / 32, iterations: 1200 } ).toString() : null;  
+      let myKey = ud.keys.filter( exch => exch.name === Exchange.BITFINEX )[0];
+      let mySecret = CryptoJS.AES.decrypt( myKey.token, this.password ).toString( CryptoJS.enc.Utf8 );
+      let myId = CryptoJS.AES.decrypt( myKey.id, this.password ).toString( CryptoJS.enc.Utf8 );
+      this.openOrdersBf = this.bitfinexServ.getOpenOrders(myId, mySecret);
   }
   
   cancelOrdersBf(orderId: number) {
-      
+      console.log(orderId);
+      let ud: Userdata = <Userdata>JSON.parse( localStorage.getItem( this.navParams.data.username ) );
+      let hash = ud !== null ? CryptoJS.PBKDF2( this.password, ud.salt, { keySize: 256 / 32, iterations: 1200 } ).toString() : null;  
+      let myKey = ud.keys.filter( exch => exch.name === Exchange.BITFINEX )[0];
+      let mySecret = CryptoJS.AES.decrypt( myKey.token, this.password ).toString( CryptoJS.enc.Utf8 );
+      let myId = CryptoJS.AES.decrypt( myKey.id, this.password ).toString( CryptoJS.enc.Utf8 );
+      this.bitfinexServ.cancelOrder(myId, mySecret, orderId).subscribe(res => console.log(res)); 
   }
 }

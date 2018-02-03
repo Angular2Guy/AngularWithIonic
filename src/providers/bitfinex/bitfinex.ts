@@ -11,6 +11,7 @@ import { Utils } from '../utils';
 import { OrderbookBf } from '../common/orderbookBf';
 import { OrderBf } from '../common/orderBf';
 import * as CryptoJS from 'crypto-js';
+import { OpenOrderBf } from "../common/openorderBf";
 
 @Injectable()
 export class BitfinexProvider {
@@ -41,6 +42,16 @@ export class BitfinexProvider {
       return this.http.get(this._bitfinex2+'/v1/book/'+currencypair, this._reqOptionsArgs).catch(this._utils.handleError);
   }
   
+  private createOptions(body: any, secret: string, key: string): any {
+      const payload = btoa(JSON.stringify(body));              
+      const signature = CryptoJS.HmacSHA384(payload, secret).toString(CryptoJS.enc.Hex);          
+      let reqOptionsArgs = { headers: new HttpHeaders().set( 'Content-Type', 'application/json' )
+                                                  .set('X-BFX-APIKEY', key)
+                                                  .set('X-BFX-PAYLOAD', payload)
+                                                  .set('X-BFX-SIGNATURE', signature)};
+      return reqOptionsArgs;
+  }
+  
   postOrder(key: string, secret: string, currpair: string, amount: number, limit: number, buysell: boolean, ordertype: string): Observable<OrderBf> {
           const nonce = Date.now().toString();
           const body = {
@@ -54,15 +65,29 @@ export class BitfinexProvider {
             side: buysell ? 'buy' : 'sell',
             type: 'exchange market'
           };
-          const payload = btoa(JSON.stringify(body));              
-          const signature = CryptoJS.HmacSHA384(payload, secret).toString(CryptoJS.enc.Hex);          
-          let reqOptionsArgs = { headers: new HttpHeaders().set( 'Content-Type', 'application/json' )
-                                                      .set('X-BFX-APIKEY', key)
-                                                      .set('X-BFX-PAYLOAD', payload)
-                                                      .set('X-BFX-SIGNATURE', signature)};          
-      
-      
+          let reqOptionsArgs = this.createOptions(body, secret, key);
 //      return this.http.post(this._bitfinex2+'/v1/account_infos', body, reqOptionsArgs).catch(this._utils.handleError);
         return this.http.post(this._bitfinex2+'/v1/order/new', body, reqOptionsArgs).catch(this._utils.handleError);
+  }
+  
+  getOpenOrders(key: string, secret: string): Observable<OpenOrderBf[]> {
+      const nonce = Date.now().toString();
+      const body = {
+              request: '/v1/orders',
+              nonce: nonce
+      }
+      let reqOptionsArgs = this.createOptions(body, secret, key);      
+      return this.http.post(this._bitfinex2+'/v1/orders', body, reqOptionsArgs).catch(this._utils.handleError);
+  }
+  
+  cancelOrder(key: string, secret: string, orderId: number) {
+      const nonce = Date.now().toString();
+      const body = {
+              request: '/v1/order/cancel',
+              nonce: nonce,
+              id: orderId
+      }
+      let reqOptionsArgs = this.createOptions(body, secret, key);
+      return this.http.post(this._bitfinex2+'/v1/order/cancel', body, reqOptionsArgs).catch(this._utils.handleError);
   }
 }
