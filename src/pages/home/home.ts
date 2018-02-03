@@ -19,9 +19,9 @@ export class HomePage {
   }
   
   ionViewDidLoad() {
-      if(this.metadata.password !== null) {
-          this.navCtrl.push(QuotesPage, this.navParams);
-      }
+//      if(this.metadata.password !== null) {
+//          this.navCtrl.push(QuotesPage, this.navParams);
+//      }
   }
   
   login():void {

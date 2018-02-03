@@ -31,10 +31,10 @@ export class OrdersPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad OrdersPage');
     this.password = this.metadata.password;
-    this.getOrders();    
+    this.getOrdersBs();    
   }
 
-  getOrders() {
+  getOrdersBs() {
       let ud: Userdata = <Userdata>JSON.parse( localStorage.getItem( this.navParams.data.username ) );
       let hash = ud !== null ? CryptoJS.PBKDF2( this.password, ud.salt, { keySize: 256 / 32, iterations: 1200 } ).toString() : null;
       if ( ud === null || !( hash === ud.hash ) ) {
@@ -46,13 +46,21 @@ export class OrdersPage {
       this.openOrdersBs =  this.bitstampServ.getOpenOrders(myKey.userid, myId, mySecret);      
   }
   
-  cancelOrder(orderId: number) {
+  cancelOrderBs(orderId: number) {
       console.log(orderId);
       let ud: Userdata = <Userdata>JSON.parse( localStorage.getItem( this.navParams.data.username ) );
       let myKey = ud.keys.filter( exch => exch.name === Exchange.BITSTAMP )[0];
       let mySecret = CryptoJS.AES.decrypt( myKey.token, this.password ).toString( CryptoJS.enc.Utf8 );
       let myId = CryptoJS.AES.decrypt( myKey.id, this.password ).toString( CryptoJS.enc.Utf8 );
       this.bitstampServ.cancelOrder(myKey.userid, myId, mySecret, orderId).subscribe(result => {          
-          setTimeout(() => this.getOrders(),3000);});      
+          setTimeout(() => this.getOrdersBs(),3000);});      
+  }
+  
+  getOrdersBf() {
+      
+  }
+  
+  cancelOrdersBf(orderId: number) {
+      
   }
 }

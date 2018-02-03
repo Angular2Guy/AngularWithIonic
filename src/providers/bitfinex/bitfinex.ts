@@ -44,8 +44,15 @@ export class BitfinexProvider {
   postOrder(key: string, secret: string, currpair: string, amount: number, limit: number, buysell: boolean, ordertype: string): Observable<OrderBf> {
           const nonce = Date.now().toString();
           const body = {
-            request: '/v1/account_infos',
-            nonce
+//            request: '/v1/account_infos',
+            request: '/v1/order/new',
+            nonce: nonce,
+            symbol: currpair,
+            amount: amount.toString(),
+            price: limit.toString(),
+            exchange: 'bitfinex',
+            side: buysell ? 'buy' : 'sell',
+            type: 'exchange market'
           };
           const payload = btoa(JSON.stringify(body));              
           const signature = CryptoJS.HmacSHA384(payload, secret).toString(CryptoJS.enc.Hex);          
@@ -55,6 +62,7 @@ export class BitfinexProvider {
                                                       .set('X-BFX-SIGNATURE', signature)};          
       
       
-      return this.http.post(this._bitfinex2+'/v1/account_infos', body, reqOptionsArgs).catch(this._utils.handleError);
+//      return this.http.post(this._bitfinex2+'/v1/account_infos', body, reqOptionsArgs).catch(this._utils.handleError);
+        return this.http.post(this._bitfinex2+'/v1/order/new', body, reqOptionsArgs).catch(this._utils.handleError);
   }
 }
