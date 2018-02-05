@@ -37,6 +37,14 @@
 	  				<button ion-button (click)="sendOrder()" [disabled]="!navParams.data.amount > 0 || !this.navParams.data.limit > 0 || !this.password.length > 0" style="float: right;">send order</button>
 	  			</ion-col>
 	  		</ion-row>
+	  		<ion-row>
+	  			<ion-col *ngIf="wrongPW" col-12 class="errorMsg">
+	  				Wrong Password
+	  			</ion-col>
+	  			<ion-col *ngIf="missingKeys" col-12 class="errorMsg">
+	  				No keys in settings
+	  			</ion-col>
+	  		</ion-row>
   		<ion-row *ngFor="let order of orders">
 			<ion-col col-3>Price:</ion-col>
 			<ion-col col-3>{{order[0]}}</ion-col>

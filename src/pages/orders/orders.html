@@ -31,7 +31,7 @@
   		<ion-col col-2><button ion-button (click)="cancelOrderBs(order.id)">Cancel</button></ion-col>
   	</ion-row>
   	
-  	<ion-row class="exchange">Bitfinex</ion-row>
+  	<ion-row id="bfheading" class=" exchange">Bitfinex</ion-row>
 	<ion-row>
   		<ion-col col-2>Pair</ion-col>
   		<ion-col col-2>Amount</ion-col>
@@ -41,11 +41,11 @@
   		<ion-col col-2>Cancel</ion-col>
   	</ion-row>
   	<ion-row *ngFor="let order of openOrdersBf | async">
-  		<ion-col col-2>{{order.currency_pair}}</ion-col>
-  		<ion-col col-2>{{order.amount}}</ion-col>
-  		<ion-col col-2>{{order.type === '0' ? 'buy' : 'sell'}}</ion-col>  		
+  		<ion-col col-2>{{order.symbol}}</ion-col>
+  		<ion-col col-2>{{order.original_amount}}</ion-col>
+  		<ion-col col-2>{{order.side}}</ion-col>  		
   		<ion-col col-2>{{order.price}}</ion-col>
-  		<ion-col col-2>{{order.datetime | date:'dd-MM-yyyy'}}</ion-col>
+  		<ion-col col-2>{{order.timestamp | date:'dd-MM-yyyy'}}</ion-col>
   		<ion-col col-2><button ion-button (click)="cancelOrderBf(order.id)">Cancel</button></ion-col>
   	</ion-row>
   	

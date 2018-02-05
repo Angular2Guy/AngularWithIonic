@@ -43,7 +43,8 @@ export class OrdersPage {
       if ( ud === null || !( hash === ud.hash ) ) {
           return;
       }
-      let myKey = ud.keys.filter( exch => exch.name === Exchange.BITSTAMP )[0];
+      let myKey = ud.keys.filter( exch => exch.name === Exchange.BITSTAMP )[0];      
+      if(!myKey.id || !myKey.token || !myKey.userid || !this.password) return;
       let mySecret = CryptoJS.AES.decrypt( myKey.token, this.password ).toString( CryptoJS.enc.Utf8 );
       let myId = CryptoJS.AES.decrypt( myKey.id, this.password ).toString( CryptoJS.enc.Utf8 );
       this.openOrdersBs =  this.bitstampServ.getOpenOrders(myKey.userid, myId, mySecret);      
@@ -63,6 +64,7 @@ export class OrdersPage {
       let ud: Userdata = <Userdata>JSON.parse( localStorage.getItem( this.navParams.data.username ) );
       let hash = ud !== null ? CryptoJS.PBKDF2( this.password, ud.salt, { keySize: 256 / 32, iterations: 1200 } ).toString() : null;  
       let myKey = ud.keys.filter( exch => exch.name === Exchange.BITFINEX )[0];
+      if(!myKey.id || !myKey.token || !this.password) return;
       let mySecret = CryptoJS.AES.decrypt( myKey.token, this.password ).toString( CryptoJS.enc.Utf8 );
       let myId = CryptoJS.AES.decrypt( myKey.id, this.password ).toString( CryptoJS.enc.Utf8 );
       this.openOrdersBf = this.bitfinexServ.getOpenOrders(myId, mySecret);

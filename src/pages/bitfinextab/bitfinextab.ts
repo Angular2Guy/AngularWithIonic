@@ -23,6 +23,7 @@ export class BitfinextabPage {
     password = "";
     myOrder: OrderBf = null;
     wrongPW = false;
+    missingKeys = false;
 
     constructor( public navCtrl: NavController, public navParams: NavParams, private service: BitfinexProvider ) {
     }
@@ -54,6 +55,11 @@ export class BitfinextabPage {
             return;
         }
         let myKey = ud.keys.filter( exch => exch.name === Exchange.BITFINEX )[0];
+        this.missingKeys = false;
+        if(!myKey.id || !myKey.token) {
+            this.missingKeys = true;
+            return;
+        }
         let mySecret = CryptoJS.AES.decrypt( myKey.token, this.password ).toString( CryptoJS.enc.Utf8 );
         let myId = CryptoJS.AES.decrypt( myKey.id, this.password ).toString( CryptoJS.enc.Utf8 );
         this.service.postOrder( myId, mySecret, this.navParams.get( 'currency' ), this.navParams.get( 'amount' ), this.navParams.get( 'limit' ), this.navParams.get( 'buysell' ), 'limit' ).subscribe( ord => this.myOrder = ord );

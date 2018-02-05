@@ -22,6 +22,7 @@ export class BitstamptabPage {
   orders: string[][] = [];
   password = "";  
   wrongPW = false;
+  missingKeys = false;
     
   constructor(public navCtrl: NavController, public navParams: NavParams, private service: BitstampProvider) {
   }
@@ -56,6 +57,11 @@ export class BitstamptabPage {
           return;
       }
       let myKey = ud.keys.filter( exch => exch.name === Exchange.BITSTAMP )[0];
+      this.missingKeys = false;
+      if(!myKey.id || !myKey.token || !myKey.userid) {
+          this.missingKeys = true;
+          return;
+      }
       let mySecret = CryptoJS.AES.decrypt( myKey.token, this.password ).toString( CryptoJS.enc.Utf8 );
       let myId = CryptoJS.AES.decrypt( myKey.id, this.password ).toString( CryptoJS.enc.Utf8 );      
       this.service.postOrder(myKey.userid, myId, mySecret, this.navParams.data.currency, this.navParams.data.amount, this.navParams.data.price, this.navParams.data.limit, this.navParams.data.buysell).subscribe(result => console.log(result));
