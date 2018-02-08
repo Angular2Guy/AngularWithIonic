@@ -7,6 +7,7 @@ import { QuoteBf } from '../../providers/common/quoteBf';
 import { QuotedetailPage } from '../quotedetail/quotedetail';
 import { SettingsPage } from '../settings/settings';
 import { OrdersPage } from '../orders/orders';
+import { MetadataProvider } from '../../providers/metadata/metadata';
 /**
  * Generated class for the QuotesPage page.
  *
@@ -31,7 +32,11 @@ export class QuotesPage {
   rippleBf = <QuoteBf> {};
   
   
-  constructor(public navCtrl: NavController, public navParams: NavParams, private bitstampServ: BitstampProvider, private bitfinexServ: BitfinexProvider) {
+  constructor(public navCtrl: NavController, 
+          public navParams: NavParams, 
+          private bitstampServ: BitstampProvider, 
+          private bitfinexServ: BitfinexProvider,
+          private metadata: MetadataProvider) {
   }
 
   ionViewDidLoad() {
@@ -59,5 +64,10 @@ export class QuotesPage {
   
   openOrders() {
       this.navCtrl.push(OrdersPage, this.navParams);
+  }
+  
+  logout() {   
+      this.metadata.password = null;
+      this.navCtrl.popToRoot();
   }
 }

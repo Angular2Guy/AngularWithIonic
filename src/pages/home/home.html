@@ -6,27 +6,36 @@
 
 <ion-content padding>
   <h2>Welcome to Cryptocurrency Trading</h2>
-  <form #myForm="ngForm">
-	  <ion-list>  
-	  	<ion-item>
-	  		<ion-label floating>Username</ion-label>
-	  		<ion-input type="text" required [(ngModel)]="username" name="username"></ion-input>
-	  	</ion-item>
-	  	<ion-item>
-	  		<ion-label floating>Password</ion-label>
-	  		<ion-input type="password" required [(ngModel)]="password" name="password"></ion-input>
-	  	</ion-item>
-	  	<ion-item *ngIf="loginFailed" class="errorMsg">
-	  		Login Failed
-	  	</ion-item>
-  		<ion-item>
-  			<ion-label>
-  				<div>
-	  			<button ion-button class="btnLeft" (click)="login()" [disabled]="!myForm.form.valid">Login</button> 
-	  			<button ion-button class="btnRight" (click)="signin()">Signin</button>
-	  			</div>
-	  		</ion-label>
-	  	</ion-item>	
-	  </ion-list>
-  </form>
+  <div *ngIf="!metadata.password">
+	  <form #myForm="ngForm">
+		  <ion-list>  
+		  	<ion-item>
+		  		<ion-label floating>Username</ion-label>
+		  		<ion-input type="text" required [(ngModel)]="username" name="username"></ion-input>
+		  	</ion-item>
+		  	<ion-item>
+		  		<ion-label floating>Password</ion-label>
+		  		<ion-input type="password" required [(ngModel)]="password" name="password"></ion-input>
+		  	</ion-item>
+		  	<ion-item *ngIf="loginFailed" class="errorMsg">
+		  		Login Failed
+		  	</ion-item>
+	  		<ion-item>
+	  			<ion-label>
+	  				<div>
+		  			<button ion-button class="btnLeft" (click)="login()" [disabled]="!myForm.form.valid">Login</button> 
+		  			<button ion-button class="btnRight" (click)="signin()">Signin</button>
+		  			</div>
+		  		</ion-label>
+		  	</ion-item>	
+		  </ion-list>
+	  </form>
+  </div>
+  <div *ngIf="metadata.password">
+  	<ion-grid>	
+		<ion-row class="exchange">
+			<button ion-button class="btnCenter" (click)="forward()">To Quotes</button>
+		</ion-row>
+	</ion-grid>
+  </div>
 </ion-content>

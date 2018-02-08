@@ -13,15 +13,13 @@ import { MetadataProvider } from '../../providers/metadata/metadata';
 export class HomePage {
   username: string;
   password: string;
-  loginFailed = false;
+  loginFailed = false;  
   constructor(public navCtrl: NavController, public navParams: NavParams, private metadata: MetadataProvider) {
 
   }
   
   ionViewDidLoad() {
-//      if(this.metadata.password !== null) {
-//          this.navCtrl.push(QuotesPage, this.navParams);
-//      }
+      console.log("Home Page");
   }
   
   login():void {
@@ -32,10 +30,16 @@ export class HomePage {
           this.navParams.data.username = this.username;
           this.metadata.password = this.password;
           this.navCtrl.push(QuotesPage, this.navParams);
+          this.username = null;
+          this.password = null;
       } else {          
           console.log(hash === null ? '' : hash +"-"+ud !== null ? ud.hash : '');
           this.loginFailed = true;
       }
+  }
+  
+  forward():void {
+      this.navCtrl.push(QuotesPage, this.navParams);
   }
   
   signin():void {
