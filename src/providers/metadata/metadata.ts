@@ -13,8 +13,9 @@ export class MetadataProvider {
   
   password: string;  
     
-  constructor(public http: Http) {
+  constructor() {
     console.log('Hello MetadataProvider Provider');
+    this.password = null;
   }
 
 }

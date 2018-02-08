@@ -19,7 +19,14 @@ export class HomePage {
   }
   
   ionViewDidLoad() {
-      console.log("Home Page");
+      //console.log("Home Page");
+  }
+  
+  ionViewDidEnter() {
+      console.log("Enter");
+      if(typeof this.metadata.password !== "undefined" && this.metadata.password !== null) {
+          this.navCtrl.push(QuotesPage, this.navParams);
+      }
   }
   
   login():void {
@@ -35,6 +42,7 @@ export class HomePage {
       } else {          
           console.log(hash === null ? '' : hash +"-"+ud !== null ? ud.hash : '');
           this.loginFailed = true;
+          this.metadata.password = null;
       }
   }
   
