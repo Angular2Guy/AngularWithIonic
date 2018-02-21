@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import * as CryptoJS from 'crypto-js';
 import { Userdata } from '../../providers/common/userdata';
+import { License } from './license';
 
 /**
  * Generated class for the SigninPage page.
@@ -20,17 +21,20 @@ export class SigninPage {
   signinForm: FormGroup;  
   pwMatching = true;
   signinFailed= false;
+  
 
   constructor(private fb: FormBuilder, public navCtrl: NavController, public navParams: NavParams) {
       this.signinForm = this.fb.group({username: ['', Validators.required],
                       password1: ['', Validators.required],
-                      password2: ['', Validators.required]},{
+                      password2: ['', Validators.required],
+                      licence: [License.text, Validators.required],
+                      accept: ['false', Validators.requiredTrue]},{
                           validator: this.validate.bind(this)
                       });
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad SigninPage');
+    console.log('ionViewDidLoad SigninPage');  
   }
   
   validate(group: FormGroup) {

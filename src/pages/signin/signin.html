@@ -1,9 +1,3 @@
-<!--
-  Generated template for the SigninPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
 
   <ion-navbar>
@@ -26,6 +20,14 @@
 	  		<ion-label floating>Password</ion-label>
 	  		<ion-input type="password" formControlName="password2"></ion-input>
 	  	</ion-item>
+	  	<ion-item>
+	  		<ion-label floating>Licence</ion-label>
+	  		<ion-textarea readonly="true" rows="3" formControlName="licence"></ion-textarea>
+	  	</ion-item>
+	  	<ion-item>
+	  		<ion-label>Accept License</ion-label>
+	  		<ion-checkbox formControlName="accept"></ion-checkbox>
+	  	</ion-item>
 	  	<ion-item *ngIf="signinFailed" class="errorMsg">
 	  		User not availiable	  		
 	  	</ion-item>
@@ -34,5 +36,4 @@
   <div padding>  	 
   	<button ion-button (click)="signin()" [disabled]="!signinForm.valid">Signin</button>
   </div>
-<p>Form value: {{ signinForm.value | json }}</p>
 </ion-content>
