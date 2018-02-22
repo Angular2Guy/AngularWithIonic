@@ -70,13 +70,13 @@ export class OrdersPage {
       this.openOrdersBf = this.bitfinexServ.getOpenOrders(myId, mySecret);
   }
   
-  cancelOrdersBf(orderId: number) {
+  cancelOrderBf(orderId: number) {
       console.log(orderId);
       let ud: Userdata = <Userdata>JSON.parse( localStorage.getItem( this.navParams.data.username ) );
       let hash = ud !== null ? CryptoJS.PBKDF2( this.password, ud.salt, { keySize: 256 / 32, iterations: 1200 } ).toString() : null;  
       let myKey = ud.keys.filter( exch => exch.name === Exchange.BITFINEX )[0];
       let mySecret = CryptoJS.AES.decrypt( myKey.token, this.password ).toString( CryptoJS.enc.Utf8 );
       let myId = CryptoJS.AES.decrypt( myKey.id, this.password ).toString( CryptoJS.enc.Utf8 );
-      this.bitfinexServ.cancelOrder(myId, mySecret, orderId).subscribe(res => console.log(res)); 
+      this.bitfinexServ.cancelOrder(myId, mySecret, orderId).subscribe(res => {setTimeout(() => this.getOrdersBf(),3000);}); 
   }
 }
