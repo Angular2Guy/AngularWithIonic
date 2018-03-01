@@ -58,12 +58,6 @@ export class BitstampProvider {
     }
     
     getOpenOrders(customerId: string, key: string, secret: string): Observable<OpenOrderBs[]> {
-//        const nonce = Date.now().toString();
-//        const payload = nonce + customerId + key;           
-//        const signature = CryptoJS.HmacSHA256(payload, secret).toString(CryptoJS.enc.Hex).toUpperCase();
-//        let reqOptionsArgs = { headers: new HttpHeaders().set( "content-type", "application/x-www-form-urlencoded").set(
-//                "accept", "application/json" )};            
-//        let body = 'key=' + key+ '&signature='+ signature+ '&nonce='+ nonce;
         let reqOptionsArgs = this.buildCommonOptions();
         let body = this.buildCommonBody(customerId, key, secret);
         return this.http.post(this._bitstamp2+'/api/v2/open_orders/all/', body, reqOptionsArgs).catch(this._utils.handleError);
