@@ -16,8 +16,10 @@ import { OpenOrderBf } from "../common/openorderBf";
 @Injectable()
 export class BitfinexProvider {
   private _reqOptionsArgs = { headers: new HttpHeaders().set( 'Content-Type', 'application/json' ) };
+  //proxy urls
   private readonly _bitfinex = '/bitfinex';  
   private readonly _bitfinex2 = '/bitfinex2';
+  //app urls
 //  private readonly _bitfinex = 'https://svenloesekann.de:8443/bitfinex';
 //  private readonly _bitfinex2 = 'https://api.bitfinex.com';
   BTCUSD = 'btcusd';

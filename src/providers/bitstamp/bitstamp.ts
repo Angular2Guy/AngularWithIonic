@@ -17,8 +17,10 @@ import * as CryptoJS from 'crypto-js';
 export class BitstampProvider {    
         
     private _reqOptionsArgs = { headers: new HttpHeaders().set( 'Content-Type', 'application/json' ) };
+    //proxy urls
     private readonly _bitstamp = '/bitstamp';
     private readonly _bitstamp2 = '/bitstamp2';
+    //app urls
 //    private readonly _bitstamp = 'https://svenloesekann.de:8443/bitstamp';
 //    private readonly _bitstamp2 = 'https://www.bitstamp.net';
     BTCUSD = 'btcusd';
