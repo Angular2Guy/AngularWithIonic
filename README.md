@@ -1,3 +1,5 @@
+# This Repository is archived 
+
 # This is an example app to show howto use Angular with the Ionic Framework to build a Smartphone app.  
 
 Author: Sven Loesekann
